@@ -22,7 +22,7 @@ def epow(a, b, p):
 
 
 def isrootable(a, p):
-    return pow(a, p - 2) % p == 1
+    return pow(a, (p - 1) / 2) % p == 1
 
 
 def esqrt(a, p):
