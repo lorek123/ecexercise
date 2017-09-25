@@ -6,7 +6,7 @@ from helpers import *
 def basic__operations():
     a = getrandomints()
     b = getrandomints()
-    p = gen_prime(a, a**5)
+    p = gen_prime(a+5, a**5)
 
     print("a= {} b= {} p= {}".format(str(a), str(b), str(p)))
 

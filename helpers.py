@@ -1,8 +1,8 @@
-from random import getrandbits
+from secrets import randbits
 
 
 def getrandomints():
-    return getrandbits(8)
+    return randbits(20)
 
 
 def primes_wilson(start, stop):
