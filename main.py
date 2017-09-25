@@ -3,13 +3,10 @@ from point import *
 from helpers import *
 
 
-def main():
-    print("Zaliczenie ćw z Przedmiotu Wykorzystanie krzywych eliptycznych w kryptografii")
-    print("Artur Lorenz")
-
+def basic__operations():
     a = getrandomints()
     b = getrandomints()
-    p = getrandomints()
+    p = gen_prime(a, a**5)
 
     print("a= {} b= {} p= {}".format(str(a), str(b), str(p)))
 
@@ -19,16 +16,37 @@ def main():
     print("a^-1= {}".format(str(efraction(a, p))))
     print("a^b= {}".format(str(epow(a, b, p))))
 
-    print("Point generation")
-    p1 = Point()
-    p1 = p1.randompoints()
-    p2 = Point()
-    p2 = p2.randompoints()
-    print("p1: ", p1.x, p1.y)
-    print("p2: ", p2.x, p2.y)
-    print("p1 + p2 = ", p1 + p2)
-    x = getrandomints()
-    print("p1 * {} = {}".format(x, p1 * x))
+
+def points_operations():
+    a = getrandomints()
+    b = getrandomints()
+    p1x = getrandomints()
+    p1y = getrandomints()
+    p2x = getrandomints()
+    p2y = getrandomints()
+    C = EllipticCurve(a=a, b=b)
+    P = Point(C, p1x, p1y)
+    Q = Point(C, p2x, p2y)
+    print("P + Q = " + (P + Q))
+    print("Q + P = " + (P + Q))
+    print("P + Q = " + (4 * P))
+    print(Q - 2 * P)
+
+
+def main():
+    print("Zaliczenie ćw z Przedmiotu Wykorzystanie krzywych eliptycznych w kryptografii")
+    print("Artur Lorenz")
+
+    basic__operations()
+    while True:
+        try:
+            points_operations()
+        except Exception:
+            pass
+        else:
+            break
+        finally:
+            pass
 
 
 if __name__ == '__main__':
