@@ -20,11 +20,12 @@ def basic__operations():
 def points_operations():
     a = getrandomints()
     b = getrandomints()
+    p = gen_prime(a+5, a**5)
     p1x = getrandomints()
     p1y = getrandomints()
     p2x = getrandomints()
     p2y = getrandomints()
-    C = EllipticCurve(a=a, b=b)
+    C = EllipticCurve(a=a, b=b, p=p)
     P = Point(C, p1x, p1y)
     Q = Point(C, p2x, p2y)
     print("P + Q = " + (P + Q))
@@ -41,8 +42,8 @@ def main():
     while True:
         try:
             points_operations()
-        except Exception:
-            pass
+        except Exception as e:
+            print(e)
         else:
             break
         finally:

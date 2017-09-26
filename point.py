@@ -1,26 +1,27 @@
 class EllipticCurve(object):
-    def __init__(self, a, b):
+    def __init__(self, a, b, p):
         self.a = a
         self.b = b
+        self.p = p
 
-        self.discriminant = -16 * (4 * a*a*a + 27 * b * b)
-        if not self.isSmooth():
-            raise Exception("The curve %s is not smooth!" % self)
+        self.discriminant = -16 * (4 * a*a*a + 27 * b * b) % p
+        if not self.isEC():
+            raise Exception("The curve %s is not Elliptic Curve!" % self)
 
-    def isSmooth(self):
+    def isEC(self):
         return self.discriminant != 0
 
     def testPoint(self, x, y):
         return y*y == x*x*x + self.a * x + self.b
 
     def __str__(self):
-        return 'y^2 = x^3 + %sx + %s' % (self.a, self.b)
+        return 'y^2 = x^3 + %sx + %s %% %s' % (self.a, self.b, self.p)
 
     def __repr__(self):
         return str(self)
 
     def __eq__(self, other):
-        return (self.a, self.b) == (other.a, other.b)
+        return (self.a, self.b, self.p) == (other.a, other.b, self.p)
 
 
 class Point(object):
@@ -30,7 +31,7 @@ class Point(object):
         self.y = y
 
         if not curve.testPoint(x, y):
-            raise Exception("The point %s is not on the given curve %s!" % (self, curve))
+            raise Exception("The point %s is not on the curve %s!" % (self, curve))
 
     def __str__(self):
         return "(%r, %r)" % (self.x, self.y)
@@ -71,7 +72,7 @@ class Point(object):
 
     def __mul__(self, n):
         if not isinstance(n, int):
-            raise Exception("Can't scale a point by something which isn't an int!")
+            raise Exception("Value needs to be an integer")
 
         if n < 0:
             return -self * -n

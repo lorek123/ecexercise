@@ -6,7 +6,6 @@ def getrandomints():
 
 
 def primes_wilson(start, stop):
-    """Generate the primes less than ``n`` using Wilson's theorem."""
     fac = 1
     for i in range(start, stop):
         fac *= i - 1
