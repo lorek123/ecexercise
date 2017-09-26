@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.6
+
 from elipticArithmetics import *
 from point import *
 from helpers import *
